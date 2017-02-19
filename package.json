@@ -4,7 +4,8 @@
   "description": "Electron menubar app for controlling a wemo device",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "electron-packager . WemoMenubar --platform=darwin --arch=x64 --version=0.36.0 --icon=Icon.icns",
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,11 @@
   },
   "homepage": "https://github.com/ryexley/poplar#readme",
   "dependencies": {
-    "menubar": "^5.2.3"
+    "menubar": "^5.2.3",
+    "wemo-client": "^0.11.2"
+  },
+  "devDependencies": {
+    "electron": "^1.4.15",
+    "electron-packager": "^8.5.1"
   }
 }
