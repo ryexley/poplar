@@ -4,7 +4,10 @@
   "description": "Electron menubar app for controlling a wemo device",
   "main": "index.js",
   "scripts": {
+    "copy-deps": "cp -r node_modules/font-awesome/fonts app/ && cp -f node_modules/font-awesome/css/font-awesome.{min.css,css.map} app/css/",
+    "prebuild": "npm run copy-deps",
     "build": "electron-packager . WemoMenubar --platform=darwin --arch=x64 --version=0.36.0 --icon=Icon.icns",
+    "prestart": "npm run copy-deps",
     "start": "electron ."
   },
   "repository": {
@@ -18,6 +21,9 @@
   },
   "homepage": "https://github.com/ryexley/poplar#readme",
   "dependencies": {
+    "electron-rpc": "^2.0.1",
+    "font-awesome": "^4.7.0",
+    "lodash": "^4.17.4",
     "menubar": "^5.2.3",
     "wemo-client": "^0.11.2"
   },
