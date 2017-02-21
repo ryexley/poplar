@@ -25,14 +25,14 @@ function toggleDeviceState( e ) {
 function registerEvents() {
     document.getElementById( "quit-button" ).addEventListener( "click", quit );
     Array.from( document.querySelectorAll( ".device-stateToggle" ) ).forEach( toggle => { toggle.addEventListener( "click", toggleDeviceState ); } );
-    // console.log( document.querySelectorAll( ".device-stateToggle" ).length );
 }
 
 function renderDevice( { friendlyName } ) {
     const deviceControlTemplate = template( [
         "<div class='device'>",
         "   <span class='device-name'>${ friendlyName }</span>",
-        "   <span class='device-stateToggle' data-state='off'><i class='fa fa-toggle-off' aria-hidden='true'></i></span>",
+        "   <span class='device-stateToggle' data-state='off' title='Toggle device state'><i class='fa fa-toggle-off' aria-hidden='true'></i></span>",
+        "   <span class='device-flash' title='Make device flash'><i class='fa fa-flash' aria-hidden='true'></i></span>",
         "</div>"
     ].join( "" ) );
 
@@ -41,10 +41,7 @@ function renderDevice( { friendlyName } ) {
 }
 
 document.addEventListener( "DOMContentLoaded", function() {
-    // alert( "Wemo Menubar Controller" );
-    // document.querySelector( "#root" ).addEventListener( "click", function() {
-    //  app.hide();
-    // } );
     renderDevice( { friendlyName: "In a meeting" } );
+    renderDevice( { friendlyName: "On a call" } );
     registerEvents();
 } );
