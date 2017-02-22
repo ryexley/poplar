@@ -55,6 +55,14 @@ footer .app-name {
     padding: 0.5em 1em;
 }
 
+.discovering-devices {
+    color: #ccc;
+    margin: 1em 0.5em;
+    text-align: center;
+}
+
+.discovering-devices .spinner {}
+
 .device {
     margin-bottom: 0.5em;
     margin-top: 0.5em;
@@ -95,6 +103,7 @@ footer .app-name {
 }
 
 .device-flash {
+    cursor: pointer;
     position: absolute;
     right: 0;
 }
