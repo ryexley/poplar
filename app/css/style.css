@@ -25,6 +25,17 @@ footer .icon {
     transition: color 0.25s ease-in-out;
 }
 
+#devTools-button {
+    bottom: 0.35em;
+    position: absolute;
+    right: 1.75em;
+    transition: color 0.25s ease-in-out;
+}
+
+#devTools-button:hover {
+    color: #489FDF;
+}
+
 #quit-button {
     bottom: 0.35em;
     position: absolute;
@@ -64,6 +75,8 @@ footer .app-name {
 .discovering-devices .spinner {}
 
 .device {
+    height: 25px;
+    line-height: 25px;
     margin-bottom: 0.5em;
     margin-top: 0.5em;
     position: relative;
@@ -77,15 +90,27 @@ footer .app-name {
     margin-bottom: 0;
 }
 
-.device-name {}
+.device-icon {
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    height: 25px;
+    left: 0;
+    position: absolute;
+    width: 25px;
+}
+
+.device-name {
+    left: 35px;
+    position: absolute;
+}
 
 .device-stateToggle {
     position: absolute;
-    right: 30px;
+    right: 0;
+    top: 4px;
 }
 
 .device-stateToggle i {
-    cursor: pointer;
     font-size: 1.35em;
     transition: color 0.25s ease-in-out;
 }
@@ -100,27 +125,4 @@ footer .app-name {
 
 .device-stateToggle i.fa-toggle-on {
     color: #090;
-}
-
-.device-flash {
-    cursor: pointer;
-    position: absolute;
-    right: 0;
-}
-
-.device-flash i {
-    border: 1px solid transparent;
-    border-radius: 50%;
-    color: #ccc;
-    cursor: pointer;
-    height: 1em;
-    padding: 2px;
-    text-align: center;
-    transition: color 0.25s ease-in-out, border 0.25s ease-in-out;
-    width: 1em;
-}
-
-.device-flash i:hover {
-    border: 1px solid #777;
-    color: #6cf;
 }

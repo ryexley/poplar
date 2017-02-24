@@ -4,14 +4,24 @@ const Wemo = require( "wemo-client" );
 
 const client = new Client();
 const wemo = new Wemo();
-const discoveryInterval = 10000;
 
 const deviceClients = {};
-
+let devicesFound = false;
 let rootEl = {};
 
 function quit() {
+    shutdownAllDevices();
     client.request( "quit" );
+}
+
+function openDevTools() {
+    client.request( "openDevTools" );
+}
+
+function shutdownAllDevices() {
+    Object.keys( deviceClients ).forEach( key => {
+        deviceClients[ key ].client.setBinaryState( 0 );
+    } );
 }
 
 function clear( el ) {
@@ -37,16 +47,40 @@ function start() {
     registerEvents();
     renderDiscoveringDevices();
     checkForDevices();
-    setInterval( checkForDevices, discoveryInterval );
 }
 
 function checkForDevices() {
-    console.log( "Discovering devices..." );
-    wemo.discover( registerDeviceClient );
+    // for initial startup...
+    // check every second until we find a device
+    const initialDiscoveryInterval = 1000;
+    setInterval( () => {
+        if ( !devicesFound ) {
+            wemo.discover( registerDeviceClient );
+        }
+    }, initialDiscoveryInterval );
+
+    // then after that...
+    // periodically check for new devices every 10 minutes
+    const periodicDiscoveryInterval = 60 * 1000 * 10;
+    // check for one minute
+    const periodicDiscoveryCheckTimeout = 60 * 1000;
+    // every five seconds
+    const periodicDiscoveryCheckInterval = 5 * 1000;
+
+    setInterval( () => {
+        const periodicCheck = setInterval( () => {
+            wemo.discover( registerDeviceClient );
+        }, periodicDiscoveryCheckInterval );
+
+        setTimeout( () => {
+            clearInterval( periodicCheck );
+        }, periodicDiscoveryCheckTimeout );
+
+    }, periodicDiscoveryInterval );
 }
 
 function registerDeviceClient( deviceInfo ) {
-    const { serialNumber: id, friendlyName, binaryState } = deviceInfo;
+    const { serialNumber: id, friendlyName, binaryState, host, port, iconList: { icon: { url: iconPath } } } = deviceInfo;
     const state = ( binaryState === 1 ) ? "on" : "off";
 
     if ( !deviceClients[ id ] ) {
@@ -59,12 +93,12 @@ function registerDeviceClient( deviceInfo ) {
         deviceClients[ id ] = { deviceInfo, client: deviceClient };
     }
 
-    renderDevice( { id, friendlyName, state } );
+    renderDevice( { id, friendlyName, state, icon: `http://${ host }:${ port }/${ iconPath }` } );
+    devicesFound = true;
 }
 
 function updateDeviceState( { deviceId, state } ) {
     const deviceControlEl = document.querySelector( `[data-deviceId='${ deviceId }'] > i` );
-    console.log( "device state updated", deviceId, state, deviceControlEl );
 }
 
 function toggleDeviceState( e ) {
@@ -88,9 +122,10 @@ function toggleDeviceState( e ) {
 
 function registerEvents() {
     document.getElementById( "quit-button" ).addEventListener( "click", quit );
+    document.getElementById( "devTools-button" ).addEventListener( "click", openDevTools );
 }
 
-function renderDevice( { id, friendlyName, state } ) {
+function renderDevice( { id, friendlyName, state, icon } ) {
     if ( rootEl.getAttribute( "data-discovering" ) ) {
         clear( rootEl );
         rootEl.removeAttribute( "data-discovering" );
@@ -98,13 +133,13 @@ function renderDevice( { id, friendlyName, state } ) {
 
     const deviceControlTemplate = template( [
         "<div class='device'>",
+        "   <img class='device-icon' src='${ icon }' />",
         "   <span class='device-name'>${ friendlyName }</span>",
         "   <span class='device-stateToggle' data-state='${ state }' data-deviceId='${ id }' title='Toggle device state'><i class='fa fa-toggle-${ state }' aria-hidden='true'></i></span>",
-        "   <span class='device-flash' title='Make device flash'><i class='fa fa-flash' aria-hidden='true'></i></span>",
         "</div>"
     ].join( "" ) );
 
-    const deviceControlEl = deviceControlTemplate( { id, friendlyName, state } );
+    const deviceControlEl = deviceControlTemplate( { id, friendlyName, state, icon } );
     rootEl.innerHTML += deviceControlEl;
 
     document.querySelector( `[data-deviceId='${ id }']` ).addEventListener( "click", toggleDeviceState );

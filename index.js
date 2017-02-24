@@ -4,8 +4,7 @@ const Menubar = require( "menubar" );
 const mb = new Menubar( {
     dir: "./app",
     height: 125,
-    width: 250,
-    alwaysOnTop: true
+    width: 250
 } );
 
 const app = new Server();
@@ -14,11 +13,14 @@ const app = new Server();
 
 mb.on( "after-create-window", () => {
     mb.window.setResizable( false );
-    mb.window.openDevTools();
 } );
 
 mb.on( "ready", () => {
     app.on( "quit", () => {
         mb.app.quit();
+    } );
+
+    app.on( "openDevTools", () => {
+        mb.window.openDevTools( { mode: "undocked" } );
     } );
 } );

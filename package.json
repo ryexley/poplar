@@ -6,7 +6,7 @@
   "scripts": {
     "copy-deps": "cp -r node_modules/font-awesome/fonts app/ && cp -f node_modules/font-awesome/css/font-awesome.{min.css,css.map} app/css/",
     "prebuild": "npm run copy-deps",
-    "build": "electron-packager . WemoMenubar --platform=darwin --arch=x64",
+    "build": "electron-packager . WemoMenubarController --platform=darwin --arch=x64 --prune=true --out=app",
     "prestart": "npm run copy-deps",
     "start": "electron ."
   },
