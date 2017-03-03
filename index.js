@@ -1,8 +1,9 @@
+const path = require( "path" );
 const Server = require( "electron-rpc/server" );
 const Menubar = require( "menubar" );
 
 const mb = new Menubar( {
-    dir: "./app",
+    dir: path.join( __dirname, "./app" ),
     height: 125,
     width: 250
 } );
