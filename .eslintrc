@@ -1,0 +1,10 @@
+{
+	"extends": [ "leankit", "leankit/es6", "leankit/react" ],
+	"parser": "babel-eslint",
+	"plugins": [ "babel" ],
+	"rules": {
+		"indent": [ "error", 4 ],
+		"react/jsx-filename-extension": [ 1, { "extensions": [ ".js", ".jsx" ] } ],
+		"react/jsx-indent": [ "error", 4 ]
+	}
+}

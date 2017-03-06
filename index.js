@@ -14,6 +14,7 @@ const app = new Server();
 
 mb.on( "after-create-window", () => {
     mb.window.setResizable( false );
+    mb.window.openDevTools( { mode: "undocked" } );
 } );
 
 mb.on( "ready", () => {
