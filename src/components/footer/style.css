@@ -1,0 +1,35 @@
+@value iconColor: #ccc;
+
+.footer {
+    background-color: rgba( 0, 0, 0, 0.05 );
+    bottom: 0;
+    left: 0;
+    padding: 0.35em 0.5em;
+    position: fixed;
+    right: 0;
+}
+
+.icon {
+    cursor: pointer;
+    float: right;
+    margin-left: 5px;
+    transition: color 0.25s ease-in-out;
+}
+
+.quitButton {
+    color: iconColor;
+    composes: icon;
+
+    &:hover {
+        color: #c00;
+    }
+}
+
+.devtoolsButton {
+    color: iconColor;
+    composes: icon;
+
+    &:hover {
+        color: #489fdf;
+    }
+}

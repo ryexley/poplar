@@ -1,3 +1,34 @@
+.style--footer--2OnkF6U {
+    background-color: rgba( 0, 0, 0, 0.05 );
+    bottom: 0;
+    left: 0;
+    padding: 0.35em 0.5em;
+    position: fixed;
+    right: 0;
+}
+
+.style--icon--2FUCWcp {
+    cursor: pointer;
+    float: right;
+    margin-left: 5px;
+    transition: color 0.25s ease-in-out;
+}
+
+.style--quitButton--2hVXRI1 {
+    color: #ccc;
+}
+
+.style--quitButton--2hVXRI1:hover {
+    color: #c00;
+}
+
+.style--devtoolsButton--deZNZfC {
+    color: #ccc;
+}
+
+.style--devtoolsButton--deZNZfC:hover {
+    color: #489fdf;
+}
 body {
     color: #444;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -8,6 +39,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: normal;
 }
 
+/*
 footer {
     background-color: rgba( 0, 0, 0, 0.05 );
     bottom: 0;
@@ -19,62 +51,62 @@ footer {
     right: 0;
 }
 
-footer .common--icon--2wpdEEi {
+footer .icon {
     color: #ccc;
     cursor: pointer;
     transition: color 0.25s ease-in-out;
 }
 
-#common--devTools-button--Ru5WyHk {
+#devTools-button {
     bottom: 0.35em;
     position: absolute;
     right: 1.75em;
     transition: color 0.25s ease-in-out;
 }
 
-#common--devTools-button--Ru5WyHk:hover {
+#devTools-button:hover {
     color: #489FDF;
 }
 
-#common--quit-button--MicwOm2 {
+#quit-button {
     bottom: 0.35em;
     position: absolute;
     right: 0.5em;
     transition: color 0.25s ease-in-out;
 }
 
-#common--quit-button--MicwOm2:hover {
+#quit-button:hover {
     color: #c00;
 }
 
-footer .common--icon--2wpdEEi.common--right--1X5yoFp {
+footer .icon.right {
     float: right;
     height: 12px;
 }
 
-footer .common--app-name--VibFqJZ {
+footer .app-name {
     bottom: 0.4em;
     color: #ccc;
     font-size: 0.75em;
     position: absolute;
 }
 
-#common--root--3zqGtUN {
+#root {
     height: 80px;
     overflow: hidden;
     overflow-y: scroll;
     padding: 0.5em 1em;
 }
 
-.common--discovering-devices--3BI1IVZ {
+.discovering-devices {
     color: #ccc;
     margin: 1em 0.5em;
     text-align: center;
 }
 
-.common--discovering-devices--3BI1IVZ .common--spinner--3fTYKw0 {}
+.discovering-devices .spinner {}
 
-.common--device--2lMPVce {
+.device {
     height: 25px;
     line-height: 25px;
     margin-bottom: 0.5em;
@@ -82,15 +114,15 @@ footer .common--app-name--VibFqJZ {
     position: relative;
 }
 
-.common--device--2lMPVce:first-child {
+.device:first-child {
     margin-top: 0;
 }
 
-.common--device--2lMPVce:last-child {
+.device:last-child {
     margin-bottom: 0;
 }
 
-.common--device-icon--1fNTZ3F {
+.device-icon {
     border: 1px solid #ccc;
     border-radius: 50%;
     height: 25px;
@@ -99,32 +131,33 @@ footer .common--app-name--VibFqJZ {
     width: 25px;
 }
 
-.common--device-name--uyCgRLS {
+.device-name {
     left: 35px;
     position: absolute;
 }
 
-.common--device-stateToggle--2-qdB62 {
+.device-stateToggle {
     position: absolute;
     right: 0;
     top: 4px;
 }
 
-.common--device-stateToggle--2-qdB62 i {
+.device-stateToggle i {
     font-size: 1.35em;
     transition: color 0.25s ease-in-out;
 }
 
-.common--device-stateToggle--2-qdB62 i.common--fa-toggle-off--1kXpfvS {
+.device-stateToggle i.fa-toggle-off {
     color: #ccc;
 }
 
-.common--device-stateToggle--2-qdB62 i.common--fa-toggle-off--1kXpfvS:hover {
+.device-stateToggle i.fa-toggle-off:hover {
     color: #777;
 }
 
-.common--device-stateToggle--2-qdB62 i.common--fa-toggle-on--1Rdl67d {
+.device-stateToggle i.fa-toggle-on {
     color: #090;
 }
+*/
 
 /*# sourceMappingURL=style.css.map*/

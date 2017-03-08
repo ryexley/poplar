@@ -5,7 +5,8 @@ const Menubar = require( "menubar" );
 const mb = new Menubar( {
     dir: path.join( __dirname, "./app" ),
     height: 125,
-    width: 250
+    width: 250,
+    alwaysOnTop: true
 } );
 
 const app = new Server();
@@ -14,7 +15,6 @@ const app = new Server();
 
 mb.on( "after-create-window", () => {
     mb.window.setResizable( false );
-    mb.window.openDevTools( { mode: "undocked" } );
 } );
 
 mb.on( "ready", () => {

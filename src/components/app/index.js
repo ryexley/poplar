@@ -1,8 +1,11 @@
 import React from "react";
+import Footer from "../footer";
 
 const App = ( props, { store } ) => {
     return (
-        <div>Wemo Menubar Controller</div>
+        <section className="app">
+            <Footer />
+        </section>
     );
 };
 

@@ -74,6 +74,7 @@ module.exports = {
             }
         ]
     },
+    target: "electron",
     performance: {
         hints: false
     }
