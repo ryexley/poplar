@@ -1,3 +1,25 @@
+@keyframes style--working-spin--JB9TVVW {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.style--discovery--2fTlsj7 {
+    color: #00acc1;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100vh;
+}
+
+.style--discoveringDevices--6HhXZ_R {
+    margin: auto;
+    padding-bottom: 1.5em;
+}
+
+.style--spinnerIcon--29hRqhJ {
+    animation: style--working-spin--JB9TVVW infinite 1s linear;
+    margin: 0 0.5em 0.1em 0.5em;
+    opacity: 0.5;
+}
 .style--footer--2OnkF6U {
     background-color: rgba( 0, 0, 0, 0.05 );
     bottom: 0;
