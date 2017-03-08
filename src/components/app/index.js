@@ -1,11 +1,13 @@
 import React from "react";
-import Discovery from "../discovery";
+// import Discovery from "../discovery";
+import DeviceList from "../DeviceList";
 import Footer from "../footer";
 
 const App = ( props, { store } ) => {
     return (
         <section className="app">
-            <Discovery />
+            {/* <Discovery /> */}
+            <DeviceList />
             <Footer />
         </section>
     );

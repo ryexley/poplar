@@ -1,24 +1,45 @@
-@keyframes style--working-spin--JB9TVVW {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.device--device--2C8tx_L {
+    height: 27px;
+    line-height: 27px;
+    position: relative;
 }
 
-.style--discovery--2fTlsj7 {
+.device--icon--BDqZSj9 {
+    background-color: #ddd;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    height: 25px;
+    left: 0;
+    position: absolute;
+    width: 25px;
+}
+
+.device--name--1NxOcbi {
     color: #00acc1;
-    display: -ms-flexbox;
-    display: flex;
-    height: 100vh;
+    left: 35px;
+    position: absolute;
 }
 
-.style--discoveringDevices--6HhXZ_R {
-    margin: auto;
-    padding-bottom: 1.5em;
+.device--stateToggle--rsYzxwJ {
+    color: #ccc;
+    cursor: pointer;
+    font-size: 1.5em;
+    position: absolute;
+    right: 0;
+    transition: color 0.25s ease-in-out;
 }
 
-.style--spinnerIcon--29hRqhJ {
-    animation: style--working-spin--JB9TVVW infinite 1s linear;
-    margin: 0 0.5em 0.1em 0.5em;
-    opacity: 0.5;
+.device--stateToggle--rsYzxwJ.device--on--3I8A0vz {
+    color: #090;
+}
+
+.device--stateToggle--rsYzxwJ.device--off--HEPVHuW:hover {
+    color: #777;
+}
+.deviceList--list--26cgHOq {
+    list-style-type: none;
+    margin: 1em;
+    padding: 0;
 }
 .style--footer--2OnkF6U {
     background-color: rgba( 0, 0, 0, 0.05 );
