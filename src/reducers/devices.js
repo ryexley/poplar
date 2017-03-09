@@ -1,3 +1,5 @@
+import { omit } from "lodash";
+
 const testDevices = {
     1234: {
         id: "1234",
@@ -9,10 +11,25 @@ const testDevices = {
     }
 };
 
+const handlers = {
+    toggleDeviceState( state, { deviceId, newState } ) {
+        // TODO: mutating state here...look into making this work without mutation
+        state.devices[ deviceId ].state = newState;
+        return state;
+    }
+};
+
 const devices = ( state = {}, action ) => {
-    state = {
-        devices: testDevices
-    };
+    // TODO: FOR TESTING ONLY
+    state.devices =  testDevices;
+
+    const { type } = action;
+    const handler = handlers[ type ];
+
+    if ( handler && typeof handler === "function" ) {
+        const args = omit( action, "type" );
+        return handlers[ type ]( state, args );
+    }
 
     return state;
 };

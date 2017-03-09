@@ -7,6 +7,7 @@ import style from "./device.css";
 const classNames = boundClassNames.bind( style );
 
 function renderToggle( state, clickHandler ) {
+    console.log( "rendering toggle => state", state );
     if ( state === "on" ) {
         return <ToggleOn onClick={ clickHandler } />;
     }
@@ -14,8 +15,8 @@ function renderToggle( state, clickHandler ) {
     return <ToggleOff onClick={ clickHandler } />;
 }
 
-const Device = ( { id, friendlyName, state, host, port, iconPath, onDeviceClick } ) => {
-    console.log( "onDeviceClick", onDeviceClick );
+const Device = ( { id, friendlyName, state, host, port, iconPath, onClick } ) => {
+    const newState = ( state === "on" ) ? "off" : "on";
     const stateToggleStyle = classNames( style.stateToggle, {
         on: state === "on",
         off: state !== "on"
@@ -26,7 +27,7 @@ const Device = ( { id, friendlyName, state, host, port, iconPath, onDeviceClick 
             <img className={ style.icon } src={ `http://${ host }:${ port }/${ iconPath }` } />
             <span className={ style.name }>{ friendlyName }</span>
             <span className={ stateToggleStyle }>
-                { renderToggle( state, onDeviceClick ) }
+                { renderToggle( state, () => onClick( id, newState ) ) }
             </span>
         </li>
     );
@@ -38,7 +39,8 @@ Device.propTypes = {
     state: React.PropTypes.string,
     host: React.PropTypes.string,
     port: React.PropTypes.string,
-    iconPath: React.PropTypes.string
+    iconPath: React.PropTypes.string,
+    onClick: React.PropTypes.func
 };
 
 export default Device;

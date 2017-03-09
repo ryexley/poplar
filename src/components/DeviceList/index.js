@@ -1,4 +1,5 @@
 import React from "react";
+import Container from "../container";
 import Device from "../Device";
 import actions from "../../actions";
 import { connect } from "react-redux";
@@ -6,22 +7,25 @@ import style from "./deviceList.css";
 
 const { device: deviceActions } = actions;
 
-const DeviceList = ( { devices, onDeviceClick }, { store } ) => {
-    console.log( "onDeviceClick?", onDeviceClick );
-    return (
-        <ul className={ style.list }>
-            { Object.keys( devices ).map( deviceId => {
-                const device = devices[ deviceId ];
-                // TODO: how do I pass `onDeviceClick` on to the Device component as a prop??
-                const deviceProps = Object.assign( {}, device, onDeviceClick );
-                return <Device key={ deviceId } { ...deviceProps } />;
-            } ) }
-        </ul>
-    );
-};
+class DeviceList extends Container {
+    render() {
+        const { devices, onDeviceClick } = this.props;
+        const deviceKeys = Object.keys( devices || {} );
 
-DeviceList.contextTypes = {
-    store: React.PropTypes.object
+        return (
+            <ul className={ style.list }>
+                { deviceKeys.length ? deviceKeys.map( deviceId => {
+                    const device = devices[ deviceId ];
+                    return (
+                        <Device
+                            { ...device }
+                            key={ deviceId }
+                            onClick={ onDeviceClick } />
+                    );
+                } ) : null }
+            </ul>
+        );
+    }
 };
 
 DeviceList.propTypes = {
@@ -43,12 +47,11 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-    // const { toggleDeviceState } = deviceActions;
+    const { toggleDeviceState } = deviceActions;
 
     return {
         onDeviceClick( deviceId, newState ) {
-            console.log( "dispatching", deviceId, newState );
-            // dispatch( toggleDeviceState( deviceId, newState ) );
+            dispatch( toggleDeviceState( deviceId, newState ) );
         }
     };
 };

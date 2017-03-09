@@ -1,5 +1,7 @@
 .list {
+    cursor: default;
     list-style-type: none;
     margin: 1em;
     padding: 0;
+    user-select: none;
 }

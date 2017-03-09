@@ -37,9 +37,14 @@
     color: #777;
 }
 .deviceList--list--26cgHOq {
+    cursor: default;
     list-style-type: none;
     margin: 1em;
     padding: 0;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 }
 .style--footer--2OnkF6U {
     background-color: rgba( 0, 0, 0, 0.05 );
