@@ -6,13 +6,10 @@ const mb = new Menubar( {
     dir: path.join( __dirname, "./app" ),
     icon: path.join( __dirname, "./app/icons/PlugIconTemplate.png" ),
     height: 125,
-    width: 250,
-    alwaysOnTop: true
+    width: 250
 } );
 
 const app = new Server();
-
-// mb.on( "after-hide", () => { mb.app.hide(); } );
 
 mb.on( "after-create-window", () => {
     mb.window.setResizable( false );

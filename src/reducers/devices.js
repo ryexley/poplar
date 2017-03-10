@@ -4,10 +4,16 @@ import WemoClient from "wemo-client";
 const wemo = new WemoClient();
 
 const defaultState = {
+    discovering: false,
     devices: {}
 };
 
 const handlers = {
+    checkingForDevices( state, { checking } ) {
+        state.discovering = checking;
+        return state;
+    },
+
     toggleDeviceState( state, { deviceId, newState } ) {
         state.devices[ deviceId ].client.setBinaryState( newState === "on" ? 1 : 0 );
         // TODO: mutating state here...look into making this work without mutation

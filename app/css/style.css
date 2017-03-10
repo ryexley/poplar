@@ -20,6 +20,36 @@
     margin: 0 0.5em 0.1em 0.5em;
     opacity: 0.5;
 }
+.no-devices-found--container--tHB_UJO {
+    color: #ad1457;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100vh;
+}
+
+.no-devices-found--content--3njV2mx {
+    margin: auto;
+    padding-bottom: 1.5em;
+    position: relative;
+}
+
+.no-devices-found--label--1fxgqSU {
+    margin-left: -20px;
+}
+
+.no-devices-found--tryAgainIcon--zfKEoU8 {
+    color: #00acc1;
+    cursor: pointer;
+    margin: 0 0.5em 0.1em 0.5em;
+    opacity: 0.5;
+    position: absolute;
+    top: -2px;
+    transition: opacity 0.25s ease-in-out;
+}
+
+.no-devices-found--tryAgainIcon--zfKEoU8:hover {
+    opacity: 1;
+}
 .device--device--2C8tx_L {
     height: 27px;
     line-height: 27px;

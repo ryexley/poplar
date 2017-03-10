@@ -2,10 +2,10 @@ import React from "react";
 import { connect } from "react-redux";
 import Container from "../container";
 import Discovery from "../discovery";
+import NoDevicesFound from "../no-devices-found";
 import DeviceList from "../DeviceList";
 import Footer from "../footer";
 import actions from "../../actions";
-
 
 class App extends Container {
     componentWillMount() {
@@ -14,12 +14,20 @@ class App extends Container {
         findDevices( dispatch );
     }
 
-    render() {
-        const { devicesFound } = this.props;
+    renderContent() {
+        const { checkingForDevices, devicesFound } = this.props;
 
+        if ( checkingForDevices() ) {
+            return <Discovery />;
+        } else {
+            return ( devicesFound() ? <DeviceList /> : <NoDevicesFound /> );
+        }
+    }
+
+    render() {
         return (
             <section className="app">
-                { devicesFound() ? <DeviceList /> : <Discovery /> }
+                { this.renderContent() }
                 <Footer />
             </section>
         );
@@ -32,6 +40,9 @@ App.contextTypes = {
 
 const mapStateToProps = state => {
     return {
+        checkingForDevices() {
+            return state.discovering;
+        },
         devicesFound() {
             return Object.keys( state.devices ).length;
         }
