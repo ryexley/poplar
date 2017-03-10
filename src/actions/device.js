@@ -5,5 +5,12 @@ export default {
             deviceId,
             newState
         };
+    },
+
+    registerDevice( deviceInfo ) {
+        return {
+            type: "registerDevice",
+            deviceInfo
+        };
     }
 };

@@ -33,7 +33,7 @@ module.exports = {
     ],
     module: {
         rules: [
-            { test: /\.(json)$/, loader: "json" },
+            { test: /\.(json)$/, loader: "json-loader" },
             {
                 test: /\.(js|jsx)$/,
                 loader: "babel-loader",

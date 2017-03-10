@@ -1,20 +1,43 @@
 import React from "react";
-// import Discovery from "../discovery";
+import { connect } from "react-redux";
+import Container from "../container";
+import Discovery from "../discovery";
 import DeviceList from "../DeviceList";
 import Footer from "../footer";
+import actions from "../../actions";
 
-const App = ( props, { store } ) => {
-    return (
-        <section className="app">
-            {/* <Discovery /> */}
-            <DeviceList />
-            <Footer />
-        </section>
-    );
-};
+
+class App extends Container {
+    componentWillMount() {
+        const { store: { dispatch } } = this.context;
+        const { discovery: { findDevices } } = actions;
+        findDevices( dispatch );
+    }
+
+    render() {
+        const { devicesFound } = this.props;
+
+        return (
+            <section className="app">
+                { devicesFound() ? <DeviceList /> : <Discovery /> }
+                <Footer />
+            </section>
+        );
+    }
+}
 
 App.contextTypes = {
     store: React.PropTypes.object
 };
 
-export default App;
+const mapStateToProps = state => {
+    return {
+        devicesFound() {
+            return Object.keys( state.devices ).length;
+        }
+    }
+};
+
+const mapDispatchToProps = dispatch => { return {}; };
+
+export default connect( mapStateToProps, mapDispatchToProps )( App );

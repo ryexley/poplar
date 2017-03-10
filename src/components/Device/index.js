@@ -7,7 +7,6 @@ import style from "./device.css";
 const classNames = boundClassNames.bind( style );
 
 function renderToggle( state, clickHandler ) {
-    console.log( "rendering toggle => state", state );
     if ( state === "on" ) {
         return <ToggleOn onClick={ clickHandler } />;
     }
