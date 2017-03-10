@@ -16,16 +16,16 @@ function renderToggle( state, clickHandler ) {
 
 const Device = ( { id, friendlyName, state, host, port, iconPath, onClick } ) => {
     const newState = ( state === "on" ) ? "off" : "on";
-    const stateToggleStyle = classNames( style.stateToggle, {
+    const deviceStyle = classNames( style.device, {
         on: state === "on",
         off: state !== "on"
     } );
 
     return (
-        <li className={ style.device }>
+        <li className={ deviceStyle }>
             <img className={ style.icon } src={ `http://${ host }:${ port }/${ iconPath }` } />
             <span className={ style.name }>{ friendlyName }</span>
-            <span className={ stateToggleStyle }>
+            <span className={ style.stateToggle }>
                 { renderToggle( state, () => onClick( id, newState ) ) }
             </span>
         </li>

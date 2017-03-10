@@ -2,6 +2,36 @@
     height: 27px;
     line-height: 27px;
     position: relative;
+
+    &.on {
+        .icon {
+            opacity: 1;
+        }
+
+        .name {
+            opacity: 1;
+        }
+
+        .stateToggle {
+            color: #090;
+        }
+    }
+
+    &.off {
+        .icon {
+            opacity: 0.5;
+        }
+
+        .name {
+            opacity: 0.5;
+        }
+
+        .stateToggle {
+            &:hover {
+                color: #777;
+            }
+        }
+    }
 }
 
 .icon {
@@ -12,12 +42,14 @@
     left: 0;
     position: absolute;
     width: 25px;
+    transition: opacity 0.25s ease-in-out;
 }
 
 .name {
     color: #00acc1;
     left: 35px;
     position: absolute;
+    transition: opacity 0.25s ease-in-out;
 }
 
 .stateToggle {
@@ -27,14 +59,4 @@
     position: absolute;
     right: 0;
     transition: color 0.25s ease-in-out;
-
-    &.on {
-        color: #090;
-    }
-
-    &.off {
-        &:hover {
-            color: #777;
-        }
-    }
 }

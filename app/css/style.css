@@ -26,6 +26,30 @@
     position: relative;
 }
 
+.device--device--2C8tx_L.device--on--3I8A0vz .device--icon--BDqZSj9 {
+    opacity: 1;
+}
+
+.device--device--2C8tx_L.device--on--3I8A0vz .device--name--1NxOcbi {
+    opacity: 1;
+}
+
+.device--device--2C8tx_L.device--on--3I8A0vz .device--stateToggle--rsYzxwJ {
+    color: #090;
+}
+
+.device--device--2C8tx_L.device--off--HEPVHuW .device--icon--BDqZSj9 {
+    opacity: 0.5;
+}
+
+.device--device--2C8tx_L.device--off--HEPVHuW .device--name--1NxOcbi {
+    opacity: 0.5;
+}
+
+.device--device--2C8tx_L.device--off--HEPVHuW .device--stateToggle--rsYzxwJ:hover {
+    color: #777;
+}
+
 .device--icon--BDqZSj9 {
     background-color: #ddd;
     border: 1px solid #ddd;
@@ -34,12 +58,14 @@
     left: 0;
     position: absolute;
     width: 25px;
+    transition: opacity 0.25s ease-in-out;
 }
 
 .device--name--1NxOcbi {
     color: #00acc1;
     left: 35px;
     position: absolute;
+    transition: opacity 0.25s ease-in-out;
 }
 
 .device--stateToggle--rsYzxwJ {
@@ -49,14 +75,6 @@
     position: absolute;
     right: 0;
     transition: color 0.25s ease-in-out;
-}
-
-.device--stateToggle--rsYzxwJ.device--on--3I8A0vz {
-    color: #090;
-}
-
-.device--stateToggle--rsYzxwJ.device--off--HEPVHuW:hover {
-    color: #777;
 }
 .deviceList--list--26cgHOq {
     cursor: default;

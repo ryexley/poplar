@@ -19983,14 +19983,14 @@ var Device = function Device(_ref) {
         onClick = _ref.onClick;
 
     var newState = state === "on" ? "off" : "on";
-    var stateToggleStyle = classNames(_device2.default.stateToggle, {
+    var deviceStyle = classNames(_device2.default.device, {
         on: state === "on",
         off: state !== "on"
     });
 
     return _react2.default.createElement(
         "li",
-        { className: _device2.default.device },
+        { className: deviceStyle },
         _react2.default.createElement("img", { className: _device2.default.icon, src: "http://" + host + ":" + port + "/" + iconPath }),
         _react2.default.createElement(
             "span",
@@ -19999,7 +19999,7 @@ var Device = function Device(_ref) {
         ),
         _react2.default.createElement(
             "span",
-            { className: stateToggleStyle },
+            { className: _device2.default.stateToggle },
             renderToggle(state, function () {
                 return onClick(id, newState);
             })
@@ -27121,7 +27121,7 @@ exports.escape = escapeXML;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-module.exports = {"device":"device--device--2C8tx_L","icon":"device--icon--BDqZSj9","name":"device--name--1NxOcbi","stateToggle":"device--stateToggle--rsYzxwJ","on":"device--on--3I8A0vz","off":"device--off--HEPVHuW"};
+module.exports = {"device":"device--device--2C8tx_L","on":"device--on--3I8A0vz","icon":"device--icon--BDqZSj9","name":"device--name--1NxOcbi","stateToggle":"device--stateToggle--rsYzxwJ","off":"device--off--HEPVHuW"};
 
 /***/ }),
 /* 327 */
