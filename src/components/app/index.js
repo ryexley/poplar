@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Container from "../container";
 import Discovery from "../discovery";
 import NoDevicesFound from "../no-devices-found";
-import DeviceList from "../DeviceList";
+import DeviceList from "../device-list";
 import Footer from "../footer";
 import actions from "../../actions";
 

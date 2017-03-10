@@ -50,37 +50,37 @@
 .no-devices-found--tryAgainIcon--zfKEoU8:hover {
     opacity: 1;
 }
-.device--device--2C8tx_L {
+.device--device--3JTG98- {
     height: 27px;
     line-height: 27px;
     position: relative;
 }
 
-.device--device--2C8tx_L.device--on--3I8A0vz .device--icon--BDqZSj9 {
+.device--device--3JTG98-.device--on--3dwtwo0 .device--icon--RitSrA6 {
     opacity: 1;
 }
 
-.device--device--2C8tx_L.device--on--3I8A0vz .device--name--1NxOcbi {
+.device--device--3JTG98-.device--on--3dwtwo0 .device--name--2KfOj_w {
     opacity: 1;
 }
 
-.device--device--2C8tx_L.device--on--3I8A0vz .device--stateToggle--rsYzxwJ {
+.device--device--3JTG98-.device--on--3dwtwo0 .device--stateToggle--Zx7-OmI {
     color: #090;
 }
 
-.device--device--2C8tx_L.device--off--HEPVHuW .device--icon--BDqZSj9 {
+.device--device--3JTG98-.device--off--1GP2XX1 .device--icon--RitSrA6 {
     opacity: 0.5;
 }
 
-.device--device--2C8tx_L.device--off--HEPVHuW .device--name--1NxOcbi {
+.device--device--3JTG98-.device--off--1GP2XX1 .device--name--2KfOj_w {
     opacity: 0.5;
 }
 
-.device--device--2C8tx_L.device--off--HEPVHuW .device--stateToggle--rsYzxwJ:hover {
+.device--device--3JTG98-.device--off--1GP2XX1 .device--stateToggle--Zx7-OmI:hover {
     color: #777;
 }
 
-.device--icon--BDqZSj9 {
+.device--icon--RitSrA6 {
     background-color: #ddd;
     border: 1px solid #ddd;
     border-radius: 50%;
@@ -91,14 +91,14 @@
     transition: opacity 0.25s ease-in-out;
 }
 
-.device--name--1NxOcbi {
+.device--name--2KfOj_w {
     color: #00acc1;
     left: 35px;
     position: absolute;
     transition: opacity 0.25s ease-in-out;
 }
 
-.device--stateToggle--rsYzxwJ {
+.device--stateToggle--Zx7-OmI {
     color: #ccc;
     cursor: pointer;
     font-size: 1.5em;
@@ -106,7 +106,7 @@
     right: 0;
     transition: color 0.25s ease-in-out;
 }
-.deviceList--list--26cgHOq {
+.deviceList--list--1CuWrRH {
     cursor: default;
     list-style-type: none;
     margin: 1em;

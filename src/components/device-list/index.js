@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "../container";
-import Device from "../Device";
+import Device from "../device";
 import actions from "../../actions";
 import { connect } from "react-redux";
 import style from "./deviceList.css";
