@@ -1,14 +1,12 @@
 {
   "name": "poplar",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Electron menubar app for controlling a wemo device",
   "main": "index.js",
   "scripts": {
     "lint": "eslint --fix --cache ./src/ || true",
-    "copy-deps": "cp -r node_modules/font-awesome/fonts app/ && cp -f node_modules/font-awesome/css/font-awesome.{min.css,css.map} app/css/",
-    "prebuild": "npm run copy-deps",
+    "prebuild": "rm -rf app/{css,fonts,js} && rm -rf build && webpack --config ./config/webpack.config.prod.js -p --progress",
     "build": "electron-packager . WemoMenubarController --platform=darwin --arch=x64 --prune=true --out=build",
-    "prestart": "npm run copy-deps",
     "start": "electron .",
     "compile-dev": "webpack --config ./config/webpack.config.dev.js || true",
     "dev-watch": "webpack --config ./config/webpack.config.dev.js --watch"
