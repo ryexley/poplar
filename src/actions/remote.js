@@ -1,13 +1,25 @@
-import Client from "electron-rpc/client";
+import AppRemote from "electron-rpc/client";
 
-const client = new Client();
+const appRemote = new AppRemote();
 
 export default {
-    quit() {
-        client.request( "quit" );
+    quit( clients ) {
+        // TODO: This functionality turns off all devices when
+        // quitting the app...consider making this a configurable
+        // "option" in the future. Could be unwanted in some cases
+        // or for some users...if anyone else ever uses it.
+
+        let devicesTurnedOff = 0;
+        clients.forEach( ( client, index ) => {
+            client.setBinaryState( 0 );
+            devicesTurnedOff = devicesTurnedOff + 1;
+            if ( devicesTurnedOff === clients.length ) {
+                appRemote.request( "quit" );
+            }
+        } );
     },
 
     openDevTools() {
-        client.request( "openDevTools" );
+        appRemote.request( "openDevTools" );
     }
 };
