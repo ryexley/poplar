@@ -26,6 +26,8 @@ const mapStateToProps = state => {
                     return devices[ key ].client;
                 } );
             }
+
+            return [];
         }
     };
 }
