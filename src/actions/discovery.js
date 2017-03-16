@@ -1,9 +1,24 @@
 import WemoClient from "wemo-client";
 import { registerDevice } from "./device";
+import { getState } from "../util/disk-io";
 
 const discoveryActions = {
     checkingForDevices( dispatch, checking ) {
         dispatch( { type: "checkingForDevices", checking } );
+    },
+
+    loadDevices( dispatch ) {
+        getState()
+            .then( ( { devices } ) => {
+                if ( devices.length ) {
+                    devices.map( ( { deviceInfo } ) => {
+                        dispatch( registerDevice( deviceInfo ) );
+                    } );
+                }
+            } )
+            .catch( () => {
+                discoveryActions.findDevices( dispatch );
+            } );
     },
 
     findDevices( dispatch ) {

@@ -10,8 +10,8 @@ import actions from "../../actions";
 class App extends Container {
     componentWillMount() {
         const { store: { dispatch } } = this.context;
-        const { discovery: { findDevices } } = actions;
-        findDevices( dispatch );
+        const { discovery: { loadDevices } } = actions;
+        loadDevices( dispatch );
     }
 
     renderContent() {

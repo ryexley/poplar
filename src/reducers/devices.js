@@ -1,5 +1,6 @@
-import { omit } from "lodash";
+import { omit, values } from "lodash";
 import WemoClient from "wemo-client";
+import { saveState } from "../util/disk-io";
 
 const wemo = new WemoClient();
 
@@ -7,6 +8,17 @@ const defaultState = {
     discovering: false,
     devices: {}
 };
+
+function prepareState( state ) {
+    const currentState = Object.assign( {}, state );
+    const stateToSave = {};
+
+    stateToSave.devices = values( currentState.devices ).map( device => {
+        return omit( device, "client" );
+    } );
+
+    return JSON.stringify( stateToSave );
+}
 
 const handlers = {
     checkingForDevices( state, { checking } ) {
@@ -24,6 +36,7 @@ const handlers = {
     registerDevice( state, { deviceInfo } ) {
         const { devices } = state;
         const { serialNumber, friendlyName, binaryState, host, port, iconList: { icon: { url: iconPath } } } = deviceInfo;
+        const deviceSetupUrl = `http://${ host }:${ port }/setup.xml`;
         const deviceState = binaryState === "0" ? "off" : "on";
         const deviceClient = wemo.client( deviceInfo );
 
@@ -31,11 +44,15 @@ const handlers = {
             id: serialNumber,
             state: deviceState,
             client: deviceClient,
+            deviceInfo,
+            deviceSetupUrl,
             friendlyName,
             host,
             port,
             iconPath
         } } );
+
+        saveState( prepareState( state ) );
 
         return state;
     }

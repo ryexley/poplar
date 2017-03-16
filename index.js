@@ -9,18 +9,29 @@ const mb = new Menubar( {
     width: 250
 } );
 
-const app = new Server();
+const host = new Server();
 
 mb.on( "after-create-window", () => {
+    host.configure( mb.window.webContents );
     mb.window.setResizable( false );
 } );
 
 mb.on( "ready", () => {
-    app.on( "quit", () => {
+    host.on( "quit", () => {
         mb.app.quit();
     } );
 
-    app.on( "openDevTools", () => {
+    host.on( "openDevTools", () => {
+        mb.setOption( "alwaysOnTop", true );
+        mb.window.webContents.on( "devtools-closed", () => {
+            mb.setOption( "alwaysOnTop", false );
+        } );
+
         mb.window.openDevTools( { mode: "undocked" } );
+    } );
+
+    host.on( "appDataPath", ( req, next ) => {
+        const appDataPath = mb.app.getPath( "appData" );
+        next( null, appDataPath );
     } );
 } );

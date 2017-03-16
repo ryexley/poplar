@@ -25,5 +25,17 @@ export default {
 
     openDevTools() {
         appRemote.request( "openDevTools" );
+    },
+
+    getAppDataPath() {
+        return new Promise( ( resolve, reject ) => {
+            appRemote.request( "appDataPath", ( err, path ) => {
+                if ( err ) {
+                    reject( err );
+                }
+
+                resolve( path );
+            } );
+        } );
     }
 };
