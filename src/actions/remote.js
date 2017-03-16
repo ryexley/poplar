@@ -12,11 +12,13 @@ export default {
         if ( clients.length ) {
             let devicesTurnedOff = 0;
             clients.forEach( ( client, index ) => {
-                client.setBinaryState( 0 );
-                devicesTurnedOff = devicesTurnedOff + 1;
-                if ( devicesTurnedOff === clients.length ) {
-                    appRemote.request( "quit" );
-                }
+                client.setBinaryState( 0, ( err, response ) => {
+                    devicesTurnedOff += 1;
+
+                    if ( devicesTurnedOff === clients.length ) {
+                        appRemote.request( "quit" );
+                    }
+                } );
             } );
         } else {
             appRemote.request( "quit" );

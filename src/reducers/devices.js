@@ -27,9 +27,14 @@ const handlers = {
     },
 
     toggleDeviceState( state, { deviceId, newState } ) {
-        state.devices[ deviceId ].client.setBinaryState( newState === "on" ? 1 : 0 );
         // TODO: mutating state here...look into making this work without mutation
         state.devices[ deviceId ].state = newState;
+        const newBinaryState = newState === "on" ? 1 : 0;
+        state.devices[ deviceId ].client.setBinaryState( newBinaryState, ( err, response ) => {
+            if ( err ) {
+                console.error( `Error toggling binary state for device ${ deviceId }: ${ err }` );
+            }
+        } );
         return state;
     },
 

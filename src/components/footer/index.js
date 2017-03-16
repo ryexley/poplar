@@ -21,6 +21,7 @@ const mapStateToProps = state => {
         clients() {
             const { devices } = state;
             const deviceKeys = Object.keys( devices );
+            console.log( "quitting with", deviceKeys );
             if ( deviceKeys.length ) {
                 return deviceKeys.map( key => {
                     return devices[ key ].client;
