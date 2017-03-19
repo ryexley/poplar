@@ -41,7 +41,6 @@ const handlers = {
     registerDevice( state, { deviceInfo } ) {
         const { devices } = state;
         const { serialNumber, friendlyName, binaryState, host, port, iconList: { icon: { url: iconPath } } } = deviceInfo;
-        const deviceSetupUrl = `http://${ host }:${ port }/setup.xml`;
         const deviceState = binaryState === "0" ? "off" : "on";
         const deviceClient = wemo.client( deviceInfo );
 
@@ -50,7 +49,6 @@ const handlers = {
             state: deviceState,
             client: deviceClient,
             deviceInfo,
-            deviceSetupUrl,
             friendlyName,
             host,
             port,

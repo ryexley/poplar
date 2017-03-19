@@ -2,6 +2,8 @@ import WemoClient from "wemo-client";
 import { registerDevice } from "./device";
 import { getState } from "../util/disk-io";
 
+const wemo = new WemoClient();
+
 const discoveryActions = {
     checkingForDevices( dispatch, checking ) {
         dispatch( { type: "checkingForDevices", checking } );
@@ -11,8 +13,11 @@ const discoveryActions = {
         getState()
             .then( ( { devices } ) => {
                 if ( devices.length ) {
-                    devices.map( ( { deviceInfo } ) => {
-                        dispatch( registerDevice( deviceInfo ) );
+                    devices.map( ( { deviceInfo: { host, port } } ) => {
+                        const setupUrl = `http://${ host }:${ port }/setup.xml`;
+                        wemo.load( setupUrl, deviceInfo => {
+                            dispatch( registerDevice( deviceInfo ) );
+                        } );
                     } );
                 }
             } )
@@ -22,7 +27,6 @@ const discoveryActions = {
     },
 
     findDevices( dispatch ) {
-        const wemo = new WemoClient();
         const checkIntervalDuration = 1000; // check every second
         const timeout = 10 * 1000; // check for 10 seconds before quitting
         let deviceFound = false;
