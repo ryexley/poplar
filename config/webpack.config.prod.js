@@ -1,7 +1,8 @@
 const path = require( "path" );
 const webpack = require( "webpack" );
-// const HtmlWebpackPlugin = require( "html-webpack-plugin" );
+const HtmlWebpackPlugin = require( "html-webpack-plugin" );
 const ExtractTextPlugin = require( "extract-text-webpack-plugin" );
+const CopyPlugin = require( "copy-webpack-plugin" );
 const autoprefixer = require( "autoprefixer" );
 const imports = require( "postcss-import" );
 const nested = require( "postcss-nested" );
@@ -10,24 +11,43 @@ const mixins = require( "postcss-mixins" );
 
 const paths = {
     entry: "./src/index.js",
-    jsOutput: "./app/js/app.js",
-    cssOutput: "./app/css/style.css",
+    jsOutput: "js/app.js",
+    cssOutput: "css/style.css",
     srcPath: "./src/",
     outputPath: "./app/"
 };
+
+const indexFileOptions ={
+    title: "Wemo Menubar Controller",
+    template: "./src/index.html",
+    filename: "index.html",
+    inject: true,
+    hash: true
+};
+
+const copyOptions = [
+    {
+        from: `${ paths.srcPath }/icons`,
+        to: `icons`,
+        force: true
+    }
+];
 
 module.exports = {
     entry: [
         paths.entry
     ],
     output: {
-        filename: paths.jsOutput
+        filename: paths.jsOutput,
+        path: paths.outputPath
     },
     resolve: {
         extensions: [ ".js", ".jsx", ".json" ]
     },
     plugins: [
+        new HtmlWebpackPlugin( indexFileOptions ),
         new ExtractTextPlugin( paths.cssOutput ),
+        new CopyPlugin( copyOptions ),
         new webpack.optimize.UglifyJsPlugin( {
             compress: { warnings: false },
             output: { comments: false }

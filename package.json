@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --fix --cache ./src/ || true",
-    "prebuild": "rm -rf app/{css,fonts,js} && rm -rf build && webpack --config ./config/webpack.config.prod.js -p --progress",
+    "prebuild": "rm -rf ./app && rm -rf ./build && webpack --config ./config/webpack.config.prod.js -p --progress",
     "build": "electron-packager . WemoMenubarController --platform=darwin --arch=x64 --prune=true --out=build",
     "start": "electron .",
-    "compile-dev": "webpack --config ./config/webpack.config.dev.js || true",
+    "precompile-dev": "rm -rf ./app",
+    "compile-dev": "webpack --config ./config/webpack.config.dev.js --progress || true",
     "dev-watch": "webpack --config ./config/webpack.config.dev.js --watch"
   },
   "repository": {
@@ -45,6 +46,7 @@
     "babel-preset-react-app": "^2.1.1",
     "babel-runtime": "^6.23.0",
     "chai": "^3.5.0",
+    "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.2",
     "electron": "^1.4.15",
     "electron-packager": "^8.5.1",
