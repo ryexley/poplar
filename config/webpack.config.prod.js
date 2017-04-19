@@ -99,5 +99,9 @@ module.exports = {
     target: "electron",
     performance: {
         hints: false
+    },
+    node: {
+        __filename: true,
+        __dirname: true
     }
 };

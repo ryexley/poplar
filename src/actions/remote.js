@@ -1,6 +1,13 @@
-import AppRemote from "electron-rpc/client";
+import { remote } from "electron";
 
-const appRemote = new AppRemote();
+const postal = remote.getGlobal( "postal" );
+
+function requestQuit() {
+    postal.publish( {
+        channel: "app",
+        topic: "request:quit"
+    } );
+}
 
 export default {
     quit( clients ) {
@@ -16,28 +23,31 @@ export default {
                     devicesTurnedOff += 1;
 
                     if ( devicesTurnedOff === clients.length ) {
-                        appRemote.request( "quit" );
+                        requestQuit();
                     }
                 } );
             } );
         } else {
-            appRemote.request( "quit" );
+            requestQuit();
         }
     },
 
     openDevTools() {
-        appRemote.request( "openDevTools" );
+        postal.publish( {
+            channel: "app",
+            topic: "request:openDevTools"
+        } );
     },
 
     getAppDataPath() {
-        return new Promise( ( resolve, reject ) => {
-            appRemote.request( "appDataPath", ( err, path ) => {
-                if ( err ) {
-                    reject( err );
-                }
+        return Promise.resolve( remote.getGlobal( "appDataPath" ) );
+    },
 
-                resolve( path );
-            } );
+    devicesUpdated( devices ) {
+        postal.publish( {
+            channel: "app",
+            topic: "devices:updated",
+            data: devices
         } );
     }
 };

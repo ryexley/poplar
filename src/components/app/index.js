@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Container from "../container";
 import Discovery from "../discovery";
@@ -35,7 +36,7 @@ class App extends Container {
 }
 
 App.contextTypes = {
-    store: React.PropTypes.object
+    store: PropTypes.object
 };
 
 const mapStateToProps = state => {
