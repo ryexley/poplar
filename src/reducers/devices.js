@@ -1,8 +1,10 @@
 import { omit, values } from "lodash";
 import WemoClient from "wemo-client";
 import { saveState } from "../util/disk-io";
+import actions from "../actions";
 
 const wemo = new WemoClient();
+const { remote: { devicesUpdated } } = actions;
 
 const defaultState = {
     discovering: false,
@@ -35,6 +37,8 @@ const handlers = {
                 console.error( `Error toggling binary state for device ${ deviceId }: ${ err }` );
             }
         } );
+
+        devicesUpdated( state.devices );
         return state;
     },
 
@@ -55,6 +59,7 @@ const handlers = {
             iconPath
         } } );
 
+        devicesUpdated( state.devices );
         saveState( prepareState( state ) );
 
         return state;

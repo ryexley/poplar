@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
 class Container extends Component {
     componentDidMount() {
@@ -14,7 +15,7 @@ class Container extends Component {
 };
 
 Container.contextTypes = {
-    store: React.PropTypes.object
+    store: PropTypes.object
 };
 
 export default Container;

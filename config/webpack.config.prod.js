@@ -14,7 +14,7 @@ const paths = {
     jsOutput: "js/app.js",
     cssOutput: "css/style.css",
     srcPath: "./src/",
-    outputPath: "./app/"
+    outputPath: path.resolve( "./app/" )
 };
 
 const indexFileOptions ={
@@ -99,5 +99,9 @@ module.exports = {
     target: "electron",
     performance: {
         hints: false
+    },
+    node: {
+        __filename: true,
+        __dirname: true
     }
 };

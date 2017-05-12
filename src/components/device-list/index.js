@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Container from "../container";
 import Device from "../device";
 import actions from "../../actions";
@@ -29,15 +30,15 @@ class DeviceList extends Container {
 };
 
 DeviceList.propTypes = {
-    devices: React.PropTypes.shape( {
-        id: React.PropTypes.string,
-        friendlyName: React.PropTypes.string,
-        state: React.PropTypes.string,
-        host: React.PropTypes.string,
-        port: React.PropTypes.string,
-        iconPath: React.PropTypes.string
+    devices: PropTypes.shape( {
+        id: PropTypes.string,
+        friendlyName: PropTypes.string,
+        state: PropTypes.string,
+        host: PropTypes.string,
+        port: PropTypes.string,
+        iconPath: PropTypes.string
     } ),
-    onDeviceClick: React.PropTypes.func
+    onDeviceClick: PropTypes.func
 };
 
 const mapStateToProps = state => {

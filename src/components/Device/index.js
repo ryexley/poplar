@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import boundClassNames from "classnames/bind";
 import ToggleOn from "react-icons/lib/fa/toggle-on";
 import ToggleOff from "react-icons/lib/fa/toggle-off";
@@ -33,13 +34,13 @@ const Device = ( { id, friendlyName, state, host, port, iconPath, onClick } ) =>
 };
 
 Device.propTypes = {
-    id: React.PropTypes.string,
-    friendlyName: React.PropTypes.string,
-    state: React.PropTypes.string,
-    host: React.PropTypes.string,
-    port: React.PropTypes.string,
-    iconPath: React.PropTypes.string,
-    onClick: React.PropTypes.func
+    id: PropTypes.string,
+    friendlyName: PropTypes.string,
+    state: PropTypes.string,
+    host: PropTypes.string,
+    port: PropTypes.string,
+    iconPath: PropTypes.string,
+    onClick: PropTypes.func
 };
 
 export default Device;
