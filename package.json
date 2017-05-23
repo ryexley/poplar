@@ -12,7 +12,8 @@
     "compile-dev": "webpack --config ./config/webpack.config.dev.js --progress || true",
     "dev-watch": "webpack --config ./config/webpack.config.dev.js --watch",
     "test": "jest --coverage",
-    "test:watch": "npm test -- --watchAll"
+    "test:watch": "npm test -- --watchAll",
+    "open-coverage": "open ./coverage/lcov-report/index.html"
   },
   "repository": {
     "type": "git",

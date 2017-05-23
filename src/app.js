@@ -2,7 +2,11 @@ import notifier from "node-notifier";
 import postal from "postal";
 import monitorCamera from "./util/camera-monitor";
 
-export default function( menubar ) {
+const defaultOptions = {
+    hideInitializedWindowAfter: 2000
+};
+
+export default function( menubar, options = defaultOptions ) {
     global.postal = postal;
     global.appDataPath = menubar.app.getPath( "appData" );
 
@@ -41,7 +45,7 @@ export default function( menubar ) {
 
     function onReady() {
         setTimeout( () => initializeWindow(), 100 );
-        setTimeout( () => menubar.window.hide(), 2000 );
+        setTimeout( () => menubar.window.hide(), options.hideInitializedWindowAfter );
         wireupEvents();
     }
 

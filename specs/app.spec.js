@@ -1,5 +1,7 @@
 import events from "events";
 import postal from "postal";
+import notifier from "node-notifier";
+import { defer } from "lodash";
 import app from "../src/app";
 
 describe( "app", () => {
@@ -29,7 +31,7 @@ describe( "app", () => {
             }
         }, menubarOptions );
 
-        instance = app( menubarMock );
+        instance = app( menubarMock, { hideInitializedWindowAfter: 0 } );
     }
 
     beforeEach( () => {
@@ -62,77 +64,103 @@ describe( "app", () => {
         expect( menubarMock.window.setResizable ).toHaveBeenCalledWith( false );
     } );
 
-    it( "should initialize the window and wire up events when the window ready event is trigger", () => {
-        jest.useFakeTimers();
+    it( "should initialize the window and wire up events when the window is ready", done => {
         postal.subscribe = jest.spyOn( postal, "subscribe" );
         menubarMock.emit( "ready" );
-        jest.runTimersToTime( 2000 );
 
-        expect( menubarMock.window.showInactive ).toHaveBeenCalledTimes( 1 );
-        expect( menubarMock.positioner.move ).toHaveBeenCalledTimes( 1 );
-        expect( menubarMock.positioner.move ).toHaveBeenCalledWith( "topRight" );
+        setTimeout( () => {
+            expect( menubarMock.window.showInactive ).toHaveBeenCalledTimes( 1 );
+            expect( menubarMock.positioner.move ).toHaveBeenCalledTimes( 1 );
+            expect( menubarMock.positioner.move ).toHaveBeenCalledWith( "topRight" );
 
-        expect( postal.subscribe ).toHaveBeenCalledTimes( 3 );
-        const requestQuit = postal.subscribe.mock.calls[ 0 ];
-        const requestOpenDevTools = postal.subscribe.mock.calls[ 1 ];
-        const devicesUpdated = postal.subscribe.mock.calls[ 2 ];
+            expect( postal.subscribe ).toHaveBeenCalledTimes( 3 );
+            const requestQuit = postal.subscribe.mock.calls[ 0 ];
+            const requestOpenDevTools = postal.subscribe.mock.calls[ 1 ];
+            const devicesUpdated = postal.subscribe.mock.calls[ 2 ];
 
-        expect( requestQuit ).toEqual( [ expect.objectContaining( {
-            channel: "app",
-            topic: "request:quit",
-            callback: expect.any( Function )
-        } ) ] );
+            expect( requestQuit ).toEqual( [ expect.objectContaining( {
+                channel: "app",
+                topic: "request:quit",
+                callback: expect.any( Function )
+            } ) ] );
 
-        expect( requestOpenDevTools ).toEqual( [ expect.objectContaining( {
-            channel: "app",
-            topic: "request:openDevTools",
-            callback: expect.any( Function )
-        } ) ] );
+            expect( requestOpenDevTools ).toEqual( [ expect.objectContaining( {
+                channel: "app",
+                topic: "request:openDevTools",
+                callback: expect.any( Function )
+            } ) ] );
 
-        expect( devicesUpdated ).toEqual( [ expect.objectContaining( {
-            channel: "app",
-            topic: "devices:updated",
-            callback: expect.any( Function )
-        } ) ] );
+            expect( devicesUpdated ).toEqual( [ expect.objectContaining( {
+                channel: "app",
+                topic: "devices:updated",
+                callback: expect.any( Function )
+            } ) ] );
 
-        postal.subscribe.mockRestore();
+            postal.subscribe.mockRestore();
+            done();
+        }, 100 );
     } );
 
-    it.skip( "should handle requests to open devtools", () => {
+    it( "should handle requests to open devtools", done => {
+        const webContentsOn = jest.spyOn( menubarMock.window.webContents, "on" );
+        const openDevTools = jest.spyOn( menubarMock.window, "openDevTools" );
+
         menubarMock.emit( "ready" );
         postal.publish( {
             channel: "app",
             topic: "request:openDevTools"
         } );
 
-        webContentsMock.on = jest.spyOn( webContentsMock, "on" );
-        expect( menubarMock.setOption ).toHaveBeenCalledTimes( 1 );
-        expect( menubarMock.setOption ).toHaveBeenCalledWith( "alwaysOnTop", true );
-        expect( webContentsMock.on ).toHaveBeenCalledTimes( 1 );
-        expect( webContentsMock.on ).toHaveBeenCalledWith( "devtools-closed", expect.any( Function ) );
-        expect( menubarMock.window.openDevTools ).toHaveBeenCalledTimes( 1 );
-        expect( menubarMock.window.openDevTools ).toHaveBeenCalledWith( { mode: "undocked" } );
-        webContentsMock.on.mockRestore();
+        defer( () => {
+            expect( menubarMock.setOption ).toHaveBeenCalledTimes( 1 );
+            expect( menubarMock.setOption ).toHaveBeenCalledWith( "alwaysOnTop", true );
+            expect( webContentsOn ).toHaveBeenCalledTimes( 1 );
+            expect( webContentsOn ).toHaveBeenCalledWith( "devtools-closed", expect.any( Function ) );
+            expect( openDevTools ).toHaveBeenCalledTimes( 1 );
+            expect( openDevTools ).toHaveBeenCalledWith( { mode: "undocked" } );
+            done();
+        } );
     } );
 
-    it.skip( "should reset state when devtools have been closed", () => {
+    it( "should reset state when devtools have been closed", done => {
+        const webContentsOn = jest.spyOn( menubarMock.window.webContents, "on" );
+
         menubarMock.emit( "ready" );
         postal.publish( {
             channel: "app",
             topic: "request:openDevTools"
         } );
 
-        webContentsMock.on = jest.spyOn( webContentsMock, "on" );
-        expect( menubarMock.setOption ).toHaveBeenCalledTimes( 1 );
-        expect( menubarMock.setOption ).toHaveBeenCalledWith( "alwaysOnTop", true );
-        expect( webContentsMock.on ).toHaveBeenCalledTimes( 1 );
-        expect( webContentsMock.on ).toHaveBeenCalledWith( "devtools-closed", expect.any( Function ) );
-        menubarMock.setOption.mockClear();
-        webContentsMock.on.mockRestore();
+        defer( () => {
+            menubarMock.setOption.mockClear();
+            webContentsMock.emit( "devtools-closed" );
 
-        webContentsMock.emit( "devtools-closed" );
+            expect( menubarMock.setOption ).toHaveBeenCalledTimes( 1 );
+            expect( menubarMock.setOption ).toHaveBeenCalledWith( "alwaysOnTop", false );
+            done();
+        } );
+    } );
 
-        expect( menubarMock.setOption ).toHaveBeenCalledTimes( 1 );
-        expect( menubarMock.setOption ).toHaveBeenCalledWith( "alwaysOnTop", false );
+    it( "should handle requests to quit", done => {
+        menubarMock.emit( "ready" );
+        postal.publish( {
+            channel: "app",
+            topic: "request:quit"
+        } );
+
+        defer( () => {
+            expect( menubarMock.app.quit ).toHaveBeenCalledTimes( 1 );
+            done();
+        } );
+    } );
+
+    it( "should handle notifier click events", done => {
+        menubarMock.emit( "ready" );
+        notifier.emit( "click" );
+
+        defer( () => {
+            expect( menubarMock.window.show ).toHaveBeenCalledTimes( 1 );
+            done();
+        } );
     } );
 } );
