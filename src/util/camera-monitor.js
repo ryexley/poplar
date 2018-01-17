@@ -10,20 +10,28 @@ function notify( devices, cameraIsOn ) {
     if ( cameraIsOn ) {
         const devicesThatAreOff = devices.filter( device => device.state === "off" );
         if ( devicesThatAreOff.length ) {
-            devicesThatAreOff.forEach( device => notifyDeviceOff( device ) );
+            devicesThatAreOff.forEach( device => {
+                if ( device.cameraReminders ) {
+                    notifyDeviceOff( device );
+                }
+            } );
         }
     } else {
         const devicesThatAreOn = devices.filter( device => device.state === "on" );
         if ( devicesThatAreOn.length ) {
-            devicesThatAreOn.forEach( device => notifyDeviceOn( device ) );
+            devicesThatAreOn.forEach( device => {
+                if ( device.cameraReminders ) {
+                    notifyDeviceOn( device );
+                }
+            } );
         }
     }
 }
 
 function monitorCamera( data, envelope ) {
     const devices = values( data ).map( device => {
-        const { id: deviceId, friendlyName, state } = device;
-        return { deviceId, friendlyName, state };
+        const { id: deviceId, friendlyName, state, cameraReminders } = device;
+        return { deviceId, friendlyName, cameraReminders, state };
     } );
 
     if ( monitoringCamera ) {

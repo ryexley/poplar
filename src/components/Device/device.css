@@ -52,6 +52,26 @@
     transition: opacity 0.25s ease-in-out;
 }
 
+.notify {
+    color: #ccc;
+    cursor: pointer;
+    position: absolute;
+    right: 35px;
+    transition: color 0.25s ease-in-out;
+}
+
+.notify--on {
+    color: #489fdf;
+}
+
+.notify--off {
+    opacity: 0.5;
+
+    &:hover {
+        color: #777;
+    }
+}
+
 .stateToggle {
     color: #ccc;
     cursor: pointer;

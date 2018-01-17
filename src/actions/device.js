@@ -1,4 +1,12 @@
 export default {
+    toggleCameraReminder( deviceId, newState ) {
+        return {
+            type: "toggleCameraReminder",
+            deviceId,
+            newState
+        };
+    },
+
     toggleDeviceState( deviceId, newState ) {
         return {
             type: "toggleDeviceState",

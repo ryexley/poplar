@@ -62,7 +62,7 @@ module.exports = {
                 include: [ path.resolve( __dirname, `../${ paths.srcPath }` ) ],
                 options: {
                     babelrc: false,
-                    presets: [ "es2015", "react" ],
+                    presets: [ "es2015-without-strict", "react", "stage-0" ],
                     plugins: [ "transform-runtime", "add-module-exports" ]
                 }
             },

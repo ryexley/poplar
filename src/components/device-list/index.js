@@ -10,7 +10,7 @@ const { device: deviceActions } = actions;
 
 class DeviceList extends Container {
     render() {
-        const { devices, onDeviceClick } = this.props;
+        const { devices, onToggleCameraReminderClick, onDeviceClick } = this.props;
         const deviceKeys = Object.keys( devices || {} );
 
         return (
@@ -21,6 +21,7 @@ class DeviceList extends Container {
                         <Device
                             { ...device }
                             key={ deviceId }
+                            toggleCameraReminder={ onToggleCameraReminderClick }
                             onClick={ onDeviceClick } />
                     );
                 } ) : null }
@@ -36,7 +37,8 @@ DeviceList.propTypes = {
         state: PropTypes.string,
         host: PropTypes.string,
         port: PropTypes.string,
-        iconPath: PropTypes.string
+        iconPath: PropTypes.string,
+        cameraReminders: PropTypes.bool
     } ),
     onDeviceClick: PropTypes.func
 };
@@ -48,9 +50,13 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-    const { toggleDeviceState } = deviceActions;
+    const { toggleCameraReminder, toggleDeviceState } = deviceActions;
 
     return {
+        onToggleCameraReminderClick( deviceId, newState ) {
+            dispatch( toggleCameraReminder( deviceId, newState ) );
+        },
+
         onDeviceClick( deviceId, newState ) {
             dispatch( toggleDeviceState( deviceId, newState ) );
         }

@@ -28,6 +28,21 @@ const handlers = {
         return state;
     },
 
+    toggleCameraReminder( state, { deviceId, newState } ) {
+        const { devices } = state;
+        devices[ deviceId ] = {
+            ...devices[ deviceId ],
+            cameraReminders: newState
+        };
+
+        devicesUpdated( devices );
+
+        return {
+            ...state,
+            devices: { ...devices }
+        };
+    },
+
     toggleDeviceState( state, { deviceId, newState } ) {
         // TODO: mutating state here...look into making this work without mutation
         state.devices[ deviceId ].state = newState;
@@ -56,7 +71,8 @@ const handlers = {
             friendlyName,
             host,
             port,
-            iconPath
+            iconPath,
+            cameraReminders: true
         } } );
 
         devicesUpdated( state.devices );
