@@ -55,6 +55,7 @@
 .notify {
     color: #ccc;
     cursor: pointer;
+    font-size: 0.85em;
     position: absolute;
     right: 35px;
     transition: color 0.25s ease-in-out;
